@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 95vh;
+        }
+        .main{
+            border: 2px solid black;
+            height: 500px;
+            width: 500px;
+        }
+        .main div{
+            border: 2px solid black;
+
+        }
+        .r {
+            display: flex;
+            height: 33%;
+        }
+        .r div{
+            width: 33%;
+            
+        }
+        .text{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 45px;
+        }
+        .disabled{
+            cursor: not-allowed;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="main" id="main">
+        <div class="row1 r">
+            <div class="row1A text"></div>
+            <div class="row1B text"></div>
+            <div class="row1C text"></div>
+        </div>
+         <div class="row2 r">
+            <div class="row2A text"></div>
+            <div class="row2B text"></div>
+            <div class="row2C text"></div>
+        </div>
+         <div class="row3 r">
+            <div class="row3A text"></div>
+            <div class="row3B text"></div>
+            <div class="row3C text"></div>
+        </div>
+    </div>
+
+
+    <dialog>
+        <p class="content"></p>
+        <button onclick="window.location.reload()">Restart</button>
+    </dialog>
+    <script>
+        var dialog = document.getElementsByTagName("dialog")[0];
+        var content = document.getElementsByClassName("content")[0];
+        var main = document.getElementById("main");
+        var player = "X";
+        // Array 
+        var arrs = [
+            "","","",
+            "","","",
+            "","","",
+        ];
+            // mouse , keyboard, click event catter inside even 
+             main.addEventListener("click", (e) => {
+            var current = document.getElementsByClassName(e.target.classList[0])[0];
+             //console.log(current.classList.contains("disabled")); 
+           if(!current.classList.contains("disabled"))
+           {
+             current.classList.add("disabled");
+                 current.innerHTML = player;            
+                //player changes code
+                
+                
+               
+                var cuclass = current.classList[0];
+                if(cuclass == "row1A"){
+                    arrs[0]=player;
+                }
+                else if(cuclass =="row1B"){
+                    arrs[1]=player;
+
+                }
+                else if(cuclass =="row1C"){
+                    arrs[2]=player;
+
+                }
+                 else if(cuclass =="row2A"){
+                    arrs[3]=player;
+
+                }
+                else if(cuclass =="row2B"){
+                    arrs[4]=player;
+
+                }
+                else if(cuclass =="row2C"){
+                    arrs[5]=player;
+
+                }
+                  else if(cuclass =="row3A"){
+                    arrs[6]=player;
+
+                }
+                else if(cuclass =="row3B"){
+                    arrs[7]=player;
+
+                }
+                else if(cuclass =="row3C"){
+                    arrs[8]=player;
+
+                }
+                
+                 if(player == "X"){
+                    player = "O";
+                }
+                else{
+                    player = "X";
+                }
+ 
+                
+                
+                if(
+                    arrs[0] == "X" && arrs[1] =="X" && arrs[2] =="X" ||
+                    arrs[3] == "X" && arrs[4] =="X" && arrs[5] =="X" || 
+                    arrs[6] == "X" && arrs[7] =="X" && arrs[8] =="X" ||
+            // Vertical
+            arrs[0] == "X" && arrs[3] =="X" && arrs[6] =="X" ||
+            arrs[1] == "X" && arrs[4] =="X" && arrs[7] =="X" ||
+            arrs[2] == "X" && arrs[5] =="X" && arrs[8] =="X" ||
+            // Diagonal
+            arrs[0] == "X" && arrs[4] =="X" && arrs[8] =="X" ||
+            arrs[2] == "X" && arrs[4] =="X" && arrs[6] =="X"
+            ){
+                    // console.log("Win X");
+                    content.innerHTML = "Win X"
+                    dialog.show()
+                    
+                }
+                else if(arrs[0] == "O" && arrs[1] =="O" && arrs[2] =="O" ||
+                    arrs[3] == "O" && arrs[4] =="O" && arrs[5] =="O" || 
+                arrs[6] == "O" && arrs[7] =="O" && arrs[8] =="O" ||
+            // Vertical
+            arrs[0] == "O" && arrs[3] =="O" && arrs[6] =="O" ||
+            arrs[1] == "O" && arrs[4] =="O" && arrs[7] =="O" ||
+            arrs[2] == "O" && arrs[5] =="O" && arrs[8] =="O" ||
+            // Diagonal
+            arrs[0] == "O" && arrs[4] =="O" && arrs[8] =="O" ||
+            arrs[2] == "O" && arrs[4] =="O" && arrs[6] =="O")
+            {
+                    // console.log("Win O");
+                content.innerHTML = "Win O"
+                    dialog.show()
+            }
+            else if(!arrs.includes("")){
+                // console.log("DRAW");
+                content.innerHTML = "Draw"
+                    dialog.show()
+            }
+                // console.log(arrs);
+                
+                
+           }
+
+        //    for(let i = 0 ; i < arrs.length;i++){
+        //     if(arrs[i] == "X" || arrs[i] == "O"){
+        //         console.log("thik");
+                
+        //     }
+        //     else{
+        //         console.log("Draw");
+                
+        //     }
+        //    }
+        });
+
+    </script>
+</body>
+</html>
